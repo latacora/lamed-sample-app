@@ -1,0 +1,35 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "RELEASE"}
+        cheshire {:mvn/version "5.10.0"}
+        com.amazonaws/aws-lambda-java-core {:mvn/version "1.2.0"}
+        com.latacora.lamed {:local/root "/home/user/code/lamed"}
+        ;; com.latacora.lamed {:git/url "git@github.com:latacora/lamed.git"
+        ;;                     :sha "aadf1b502fd1b0f557c69bc6bc0ae2d5fa4a97aa"}
+        }
+ :aliases
+ {:test {:extra-paths ["test"]
+         :extra-deps {org.clojure/test.check {:mvn/version "1.0.0"}}}
+  :runner {:extra-deps {com.cognitect/test-runner
+                {:git/url "https://github.com/cognitect-labs/test-runner"
+                 :sha "f7ef16dc3b8332b0d77bc0274578ad5270fbfedd"}}
+           :main-opts ["-m" "cognitect.test-runner"
+                       "-d" "test"]}
+  :uberjar {:main-opts ["-m" "hf.depstar.ubemoloch-handlerrjar" "lamed-sample-app.jar"
+                        "-C" "-m" "com.latacora.examples.lamed-sample-app"]
+            :extra-deps {seancorfield/depstar {:mvn/version "1.0.94"}}
+            }
+  :native-image {:main-opts ["-m clj.native-image com.latacora.examples.lamed-sample-app"
+                             "--verbose"
+                             "--no-fallback"
+                             "-Dclojure.compiler.direct-linking=true"
+                             "-H:Name=lamed-sample-app"
+                             "-H:+ReportExceptionStackTraces"
+                             "-H:EnableURLProtocols=http"
+                             "--initialize-at-build-time"
+                             "--report-unsupported-elements-at-runtime"
+                             "--allow-incomplete-classpath"]
+                 :jvm-opts ["-Dclojure.compiler.direct-linking=true"]
+                 :extra-deps {clj.native-image {:git/url "https://github.com/taylorwood/clj.native-image.git"
+                                                :sha "602587dfb5243ea8c72ed3e967c37c1f9d611723"}
+                              }}
+  }}
