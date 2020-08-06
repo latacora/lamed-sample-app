@@ -25,8 +25,8 @@ work w/ an uberjar-based lambda and once the code is verified, compile & deploy 
 
 Build & deploy uberjar lambda:
 
-    $ aws-vault exec <your-account> -- redeploy.sh 
+    $ aws-vault exec <your-account> -- <path/to>redeploy.sh 
     
 Build & deploy native-image lambda:
 
-    $ aws-vault exec <your-account> -- redeploy.sh native-image
+    $ aws-vault exec <your-account> -- <path/to>redeploy.sh native-image
