@@ -13,7 +13,7 @@
                  :sha "f7ef16dc3b8332b0d77bc0274578ad5270fbfedd"}}
            :main-opts ["-m" "cognitect.test-runner"
                        "-d" "test"]}
-  :uberjar {:main-opts ["-m" "hf.depstar.ubemoloch-handlerrjar" "lamed-sample-app.jar"
+  :uberjar {:main-opts ["-m" "hf.depstar.uberjar" "lamed-sample-app.jar"
                         "-C" "-m" "com.latacora.examples.lamed-sample-app"]
             :extra-deps {seancorfield/depstar {:mvn/version "1.0.94"}}
             }

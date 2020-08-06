@@ -1,5 +1,6 @@
 
 resource "aws_lambda_function" "lamed-sample-native-image" {
+  count = fileexists(var.native_image_zip_path) ? 1 : 0
   function_name = "lamed-sample-native-image"
   filename = var.native_image_zip_path
   source_code_hash = filebase64sha256(var.native_image_zip_path)
@@ -10,16 +11,18 @@ resource "aws_lambda_function" "lamed-sample-native-image" {
   timeout       = 300
 }
 
-# resource "aws_lambda_function" "lamed-sample-uberjar" {
-#   function_name = "lamed-sample-uberjar"
-#   filename = var.uberjar_path
-#   source_code_hash = filebase64sha256(var.uberja_path)
-#   role          = aws_iam_role.lamed_sample_app.arn
-#   handler       = "not-used-by-lamed"
-#   runtime       = "provided"
-#   memory_size   = 512
-#   timeout       = 300
-# }
+# use uberjar deployment for prototyping because native-image compile times are long
+resource "aws_lambda_function" "lamed-sample-uberjar" {
+  count = fileexists(var.uberjar_path) ? 1 : 0
+  function_name = "lamed-sample-uberjar"
+  filename = var.uberjar_path
+  source_code_hash = filebase64sha256(var.uberjar_path)
+  role          = aws_iam_role.lamed_sample_app.arn
+  handler       = "com.latacora.examples.lamed_sample_app"
+  runtime       = "java8"
+  memory_size   = 512
+  timeout       = 300
+}
 
 data "aws_iam_policy_document" "lamed_sample_app" {
   statement {

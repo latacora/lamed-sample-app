@@ -11,3 +11,6 @@
 .hg/
 *.tfstate*
 .terraform
+function.zip
+lamed-sample-app
+lamed-sample-app.jar
