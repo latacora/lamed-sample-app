@@ -6,6 +6,8 @@ it takes a long time to compile native-image executables, it's easier to do deve
 work w/ an uberjar-based lambda and once the code is verified, compile & deploy with native-image.
 
 ## Outline of steps for a clojure native-image lambda:
+
+(this repo implements the below steps)
 1. install GraalVM and native-image according to https://www.graalvm.org/getting-started/
 2. Add deps.edn alias for nativeimage
 3. Add an executable bootstrap bash script that will run your exe built by native-image
@@ -14,7 +16,7 @@ work w/ an uberjar-based lambda and once the code is verified, compile & deploy 
 5. in your handler code, define a -main function that passes your handler func to lamed/delegate!
 6. compile your exe w/ clj -A:native-image
 7. zip bootstrap and exe into a .zip
-8. change lambda terraform code `runtime` property to "provided" and point filename (or s3 bucket/etc.) to .zip from 6
+8. change lambda terraform code `runtime` property to "provided" and point filename (or s3 bucket/etc.) to .zip from previous step
 9. deploy to aws
 
 ## Usage
