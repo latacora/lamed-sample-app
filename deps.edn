@@ -2,9 +2,8 @@
  :deps {org.clojure/clojure {:mvn/version "RELEASE"}
         cheshire {:mvn/version "5.10.0"}
         com.amazonaws/aws-lambda-java-core {:mvn/version "1.2.0"}
-        com.latacora.lamed {:local/root "/home/user/code/lamed"}
-        ;; com.latacora.lamed {:git/url "git@github.com:latacora/lamed.git"
-        ;;                     :sha "aadf1b502fd1b0f557c69bc6bc0ae2d5fa4a97aa"}
+        com.latacora.lamed {:git/url "git@github.com:latacora/lamed.git"
+                            :sha "7732ca5bb41e905a096a2aeec0921c22521783c4"}
         }
  :aliases
  {:test {:extra-paths ["test"]
